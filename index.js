@@ -1,16 +1,14 @@
 const app = require("express")();
-const http = require("http").createServer(app);
+// const http = require("http").createServer(app);
 const { Server } = require("ws");
+// http.listen(8080);
 app.get("/", (req, res) => {
   res.send("Node Server is running. Yay!!");
 });
+
 // const socketio = require("socket.io")(http);
+const server = app.listen(8080, () => console.log(`Listening on ${8080}`));
 const wss = new Server({ server });
-wss.on("connection", function (ws, req) {
-  ws.on("message", (message) => {
-    var dataString = message.toString();
-  });
-});
 
 var webSockets = {};
 
@@ -38,4 +36,3 @@ wss.on("connection", function (ws, req) {
     }
   });
 });
-http.listen(8080);
